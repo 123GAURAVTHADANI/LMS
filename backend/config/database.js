@@ -1,4 +1,4 @@
-const { sequelize } = require("../models");
+const { Sequelize } = require("sequelize");
 
 const env = require("./env");
 

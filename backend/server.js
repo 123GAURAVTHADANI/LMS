@@ -2,10 +2,14 @@ var express = require("express");
 var app = express();
 
 var env = require("./config/env");
-require("dotenv").config();
 
 // start server
 var PORT = env.port;
+
+// health check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({ message: "Server is healthy" });
+});
 
 async function startServer() {
   try {
@@ -17,6 +21,7 @@ async function startServer() {
     console.log("Database connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);
+    process.exit(1); // Exit the process with an error code
   }
 }
 
